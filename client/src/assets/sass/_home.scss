@@ -1,0 +1,133 @@
+.th {
+  border-radius: 4px;
+  border: 0;
+  overflow: hidden;
+  box-shadow: 9px 11px 14px 0 rgba(0, 0, 0, 0.5);
+  margin: 20px 0;
+  &:hover {
+    box-shadow: 9px 11px 14px 0 rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+.home-bg {
+  background-image: url("../img/home/bg.jpg");
+  background-position: top center;
+  background-size: cover;
+  padding: 100px 0;
+  height: 100%;
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+      -180deg,
+      rgba(27, 27, 27, 0) 0%,
+      #1b1b1b 100%
+    );
+    /* opacity: .5; */
+    height: 100%;
+  }
+  & h1 {
+    font-family: "SW";
+    font-size: 58px;
+  }
+  & .btn {
+    margin-top: 20px;
+    background-color: transparent;
+    background-image: url("../img/home/btn.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 40px;
+    font-family: "SW";
+    font-size: 18px;
+    color: #8e1f18;
+    z-index: 9;
+    position: relative;
+    transition: all 0.4s ease;
+    &:hover {
+      color: #8e1f18;
+      transform: scale(1.05);
+      transition: all 0.4s ease;
+    }
+  }
+}
+
+.gallery {
+  & .title {
+    font-family: "SW";
+    font-size: 2rem;
+  }
+}
+
+.map-item {
+  &.button {
+    background-color: #3a3a3a;
+    border: 1px solid white;
+    border-radius: 50px;
+    padding: 6px 20px;
+    margin: 0 auto;
+    opacity: 0.4;
+    margin-bottom: 20px;
+    color: white;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  text-align: center;
+}
+
+.header h4 {
+  & small {
+    margin-left: 10px;
+    font-family: Arial;
+  }
+  & a {
+    color: #cc9221;
+    &:hover {
+      color: #f9b521;
+    }
+  }
+}
+
+.lazy {
+  min-width: 100%;
+  min-height: 200px;
+  border-radius: 4px 4px 0 0;
+  background: url("/img/home/loader.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 39.9375em) {
+  .th {
+    margin: 20px;
+  }
+}
+
+.credits {
+  color: #999999;
+  font-size: 12px;
+  & a {
+    color: #cc9221;
+    &:hover {
+      color: #f9b521;
+    }
+  }
+}
+
+.discord-link {
+  position: absolute;
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
+  width: 100px;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    width: 110px;
+  }
+}
