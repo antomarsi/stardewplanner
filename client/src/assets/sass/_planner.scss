@@ -1,0 +1,113 @@
+/* CARDS*/
+.planner {
+  .card-title {
+    font-family: "SW";
+  }
+
+  .changelog {
+    & li {
+      font-size: 11px;
+    }
+  }
+  .credits-card {
+    & .badge,
+    a {
+      color: $white;
+    }
+  }
+}
+
+/** Version notification **/
+.facebook-notification,
+.nexus-notification,
+.front-page-notification,
+.us-notification,
+.version-notification,
+.render-notification,
+.open-source-notification {
+  top: 10px;
+  left: 10px;
+}
+
+.open-source-notification .header {
+  color: #00cc00;
+}
+
+.count-report-notification {
+  top: 10px;
+  left: 10px;
+  overflow: hidden;
+  & .content {
+    max-height: 500px;
+    width: 200px;
+    overflow: auto;
+    font-size: 14px;
+  }
+}
+
+.custom-layout-notification {
+  top: 10px;
+  right: 10px;
+  overflow: hidden;
+}
+
+.discord-notification {
+  top: 10px;
+  right: 50%;
+  left: -100px;
+}
+
+.count-report-row {
+  padding-left: 8px;
+  padding-right: 8px;
+  display: block;
+  clear: both;
+}
+
+.count-report-name {
+  display: inline;
+}
+
+.count-report-count {
+  display: inline;
+  float: right;
+}
+
+.notification {
+  position: absolute;
+  font-family: "Helvetica Neue", Helvetica;
+  font-size: 12px;
+  color: #ccc;
+  display: none;
+  & a {
+    color: #999;
+    text-decoration: underline;
+  }
+  & .header {
+    background-color: #333;
+    padding: 5px;
+    & .hide-notification {
+      color: #d21616;
+      float: right;
+      &nhover {
+        color: #e41616;
+      }
+    }
+  }
+  & .content {
+    background-color: #555;
+    padding: 5px;
+    border: 1px solid #333;
+  }
+}
+
+.google-notification {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  display: block;
+}
+
+.hide-google-notification {
+  cursor: pointer;
+}

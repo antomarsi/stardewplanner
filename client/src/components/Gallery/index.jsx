@@ -4,26 +4,27 @@ import Lightbox from "react-image-lightbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import { Row, Col, Button } from "reactstrap";
 
 const Gallery = ({ title, description, planList, loading }) => {
   const [Open, setOpen] = useState(false);
   const [PhotoIndex, setPhotoIndex] = useState(0);
   return (
-    <div className="row gallery">
-      <div className="col-12 text-left">
+    <Row className="gallery">
+      <Col xs={12} className="text-left">
         <h4>
           <span className="title">{title}</span>{" "}
           <small className="text-muted">{description}</small>
         </h4>
-      </div>
+      </Col>
       {loading && (
-        <div className="col-12 text-center">
+        <Col xs={12} className="text-center">
           <FontAwesomeIcon icon={faSpinner} spin size={"3x"} />
-        </div>
+        </Col>
       )}
       {!loading &&
         planList.map((planData, index) => (
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 text-center">
+          <Col xs={12} sm={6} md={4} lg={3} xl={2} className="text-center">
             <div
               className="image-wrapper"
               onClick={() => {
@@ -31,12 +32,12 @@ const Gallery = ({ title, description, planList, loading }) => {
                 setPhotoIndex(index);
               }}
             >
-              <img class="img-fluid rounded" src={planData.render_url} />
+              <img className="img-fluid rounded" src={planData.render_url} />
             </div>
-            <Link class="btn mt-1 py-2 mb-3" to={`/planner/${planData.slug}`}>
+            <Button className="mt-1 py-2 mb-3" tag={Link} to={`/planner/${planData.slug}`}>
               Plan
-            </Link>
-          </div>
+            </Button>
+          </Col>
         ))}
       {Open && (
         <Lightbox
@@ -55,7 +56,7 @@ const Gallery = ({ title, description, planList, loading }) => {
           }
         />
       )}
-    </div>
+    </Row>
   );
 };
 

@@ -5,8 +5,9 @@ import Gallery from "../../components/Gallery";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRequest } from "../../store/ducks/home/actions";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Container, Row, Col, Button } from "reactstrap";
 
-const HomePage = () => {
+const Home = () => {
   const { data, loading, error } = useSelector(state => state.home);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -14,23 +15,9 @@ const HomePage = () => {
   }, [dispatch]);
   return (
     <div className="d-flex home-bg">
-      <div className="discord-link fixed-top">
-        <a
-          href="https://discord.gg/QBqBAzp"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src={discordLogo}
-            className="img-fluid"
-            title="Come chat with us!"
-            alt="Come chat with us on Discord!"
-          />
-        </a>
-      </div>
-      <div className="container">
-        <div className="row no-gutter">
-          <div className="col-12 text-center">
+      <Container>
+        <Row noGutters>
+          <Col xs={12} className="text-center">
             <h1>Stardew Planner</h1>
             <h5>
               This excellent tool helps you to plan out your farm easily and
@@ -65,11 +52,11 @@ const HomePage = () => {
                 Karel Eding
               </a>
             </div>
-            <Link className="btn" to="/planner/">
+            <Button tag={Link} to="/planner/">
               Start Planning
-            </Link>
-          </div>
-        </div>
+            </Button>
+          </Col>
+        </Row>
         {
           //<!-- Popular -->
         }
@@ -85,6 +72,7 @@ const HomePage = () => {
                 href="https://www.facebook.com/groups/stardewplanner/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-yellow"
               >
                 Facebook community
               </a>
@@ -111,9 +99,9 @@ const HomePage = () => {
           planList={data.latest}
           description={"Latest renders by render creation time"}
         />
-      </div>
+      </Container>
     </div>
   );
 };
 
-export default HomePage;
+export default Home;
