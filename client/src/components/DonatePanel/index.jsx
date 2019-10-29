@@ -13,6 +13,7 @@ const DonatePanel = () => (
           href="https://www.paypal.com/paypalme/hpeinar/"
           target="_blank"
           className="paypal-blue"
+          rel="noopener noreferrer"
         >
           @PayPal
         </a>{" "}
@@ -21,6 +22,7 @@ const DonatePanel = () => (
           href="https://www.patreon.com/bePatron?c=1239286"
           target="_blank"
           className="patreon-orange"
+          rel="noopener noreferrer"
         >
           @Patreon
         </a>

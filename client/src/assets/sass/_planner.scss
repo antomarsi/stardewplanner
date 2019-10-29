@@ -1,6 +1,6 @@
 /* CARDS*/
 .planner {
-  .card-title {
+  .card-  itle {
     font-family: "SW";
   }
 
@@ -110,4 +110,17 @@
 
 .hide-google-notification {
   cursor: pointer;
+}
+.planner {
+  padding-top: 65px;
+}
+
+div.toolbar {
+  position: absolute;
+  top: 50%;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }

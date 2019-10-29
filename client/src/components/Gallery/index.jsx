@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Lightbox from "react-image-lightbox";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom/cjs/react-router-dom";
-import { Row, Col, Button } from "reactstrap";
+import { Row, Col, Button, Spinner } from "reactstrap";
 
 const Gallery = ({ title, description, planList, loading }) => {
   const [Open, setOpen] = useState(false);
@@ -19,7 +17,7 @@ const Gallery = ({ title, description, planList, loading }) => {
       </Col>
       {loading && (
         <Col xs={12} className="text-center">
-          <FontAwesomeIcon icon={faSpinner} spin size={"3x"} />
+          <Spinner color="yellow" style={{ width: '3rem', height: '3rem' }}/>
         </Col>
       )}
       {!loading &&
@@ -32,9 +30,13 @@ const Gallery = ({ title, description, planList, loading }) => {
                 setPhotoIndex(index);
               }}
             >
-              <img className="img-fluid rounded" src={planData.render_url} />
+              <img className="img-fluid rounded" src={planData.render_url} alt="Edit this plan" />
             </div>
-            <Button className="mt-1 py-2 mb-3" tag={Link} to={`/planner/${planData.slug}`}>
+            <Button
+              className="mt-1 py-2 mb-3"
+              tag={Link}
+              to={`/planner/${planData.slug}`}
+            >
               Plan
             </Button>
           </Col>

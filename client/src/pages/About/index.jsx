@@ -56,7 +56,7 @@ const About = () => (
       </div>
       <div className="panel info text-center" id="google">
         <h3>Stardew Valley merchandise shop!:</h3>
-        <a href="https://www.stardewvalley.net/shop/" target="_blank">
+        <a href="https://www.stardewvalley.net/shop/" target="_blank"  rel="noopener noreferrer">
           <img
             className="img-fluid"
             src="https://www.stardewvalley.net/wp-content/uploads/2018/12/Item_Shop_logo.png"
@@ -85,7 +85,7 @@ const About = () => (
         <br />
         <b>
           GitHub:{" "}
-          <a href="https://github.com/hpeinar/stardewplanner" target="_blank">
+          <a href="https://github.com/hpeinar/stardewplanner" target="_blank"  rel="noopener noreferrer">
             @GitHub
           </a>
         </b>
@@ -94,6 +94,7 @@ const About = () => (
         <a
           href="https://www.reddit.com/r/StardewValley/comments/4ckzzo/stardew_farm_planner_v2_is_out_save_importing/"
           target="_blank"
+          rel="noopener noreferrer"
         >
           v2 planner thread
         </a>
@@ -102,6 +103,7 @@ const About = () => (
         <a
           href="http://community.playstarbound.com/threads/farm-planner-v2-out-now-save-importing-and-much-more.112098/"
           target="_blank"
+          rel="noopener noreferrer"
         >
           Official forums thread
         </a>
@@ -109,8 +111,8 @@ const About = () => (
         <b>Steam thread:</b>{" "}
         <a
           href="http://steamcommunity.com/app/413150/discussions/0/365163537814721588/"
-          target="_blimport { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-ank"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Discussion thread
         </a>
@@ -120,7 +122,7 @@ ank"
         <span className="hide-email">lllll</span>l.com
         <br />
         <b>
-          Twitter: <a href="https://twitter.com/hpeinar">@hpeinar</a> &
+          Twitter: <a href="https://twitter.com/hpeinar" target="_blank" rel="noopener noreferrer">@hpeinar</a> &
           #stardewplanner
         </b>
         <br />
@@ -143,7 +145,7 @@ ank"
           <dt>1. What is this?</dt>
           <dd>
             This is{" "}
-            <a href="http://stardewvalley.net/" target="_blank">
+            <a href="http://stardewvalley.net/" target="_blank"  rel="noopener noreferrer">
               Stardew Valley
             </a>{" "}
             interactive farm planner
@@ -170,13 +172,14 @@ ank"
           <dt>5. Not working? Having any issues?</dt>
           <dd>
             Feel free to contact me in{" "}
-            <a href="https://www.reddit.com/user/hpeinar" target="_blank">
+            <a href="https://www.reddit.com/user/hpeinar" target="_blank"  rel="noopener noreferrer">
               reddit
             </a>{" "}
             or{" "}
             <a
               href="http://community.playstarbound.com/members/hpeinar.609256/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Stardew official forums
             </a>

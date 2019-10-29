@@ -4,9 +4,9 @@ import { faFacebook, faDiscord } from "@fortawesome/free-brands-svg-icons";
 import {
   faHome,
   faInfo,
-  faPencilRuler
+  faPencilRuler,
+  faCircle
 } from "@fortawesome/free-solid-svg-icons";
-import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import {
   Collapse,
   Navbar,
@@ -29,14 +29,14 @@ const NavBar = () => {
   return (
     <Navbar color="dark" dark fixed="top" expand="md">
       <NavbarBrand href="/">
-        Stardew planner <small className>v2</small>
+        Stardew planner <small className="text-muted">v2</small>
       </NavbarBrand>
       <NavbarToggler onClick={toggleNavbar} className="mr-2" />
       <Collapse isOpen={!collapsed} navbar>
         <Nav navbar className="mr-auto">
           <NavItem>
             <NavLink tag={RRNavLink} to="/" exact activeClassName="active">
-              <FontAwesomeIcon icon={faHome} mask={faCircle}/> Home
+              <FontAwesomeIcon icon={faHome} mask={faCircle} /> Home
             </NavLink>
           </NavItem>
           <NavItem>
@@ -46,7 +46,7 @@ const NavBar = () => {
           </NavItem>
           <NavItem>
             <NavLink tag={RRNavLink} to="/about" activeClassName="active">
-              <FontAwesomeIcon icon={faInfo} mask={faCircle}/> About
+              <FontAwesomeIcon icon={faInfo} mask={faCircle} /> About
             </NavLink>
           </NavItem>
           <UncontrolledDropdown nav inNavbar>

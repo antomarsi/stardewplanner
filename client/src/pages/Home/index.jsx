@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import discordLogo from "../../assets/img/home/discord.png";
 import swLogo from "../../assets/img/home/sw-logo.png";
 import Gallery from "../../components/Gallery";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,7 +7,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Container, Row, Col, Button } from "reactstrap";
 
 const Home = () => {
-  const { data, loading, error } = useSelector(state => state.home);
+  const { data, loading } = useSelector(state => state.home);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchRequest());

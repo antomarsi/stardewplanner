@@ -17,7 +17,7 @@ const ChangeLogPanel = () => {
               thanks to{" "}
               <a
                 href="https://www.nexusmods.com/users/38947035?tab=user+files"
-                target="_blank"
+                target="_blank"  rel="noopener noreferrer">
               >
                 Zola from #modding @
               </a>{" "}
@@ -30,7 +30,7 @@ const ChangeLogPanel = () => {
               Added Farm Extended map layout by Forkmaster. Big thanks to{" "}
               <a
                 href="https://www.nexusmods.com/users/38947035?tab=user+files"
-                target="_blank"
+                target="_blank"  rel="noopener noreferrer">
               >
                 Zola from #modding @
               </a>{" "}
@@ -49,7 +49,7 @@ const ChangeLogPanel = () => {
             <li>
               Changed bee-hive highlighting to match the game (It's awkward now,
               I know), more info{" "}
-              <a href="https://stardewvalleywiki.com/Bee_House" target="_blank">
+              <a href="https://stardewvalleywiki.com/Bee_House" target="_blank"  rel="noopener noreferrer">>
                 from the wiki
               </a>
               . Thanks <b>@Dawnmist</b>
@@ -72,7 +72,7 @@ const ChangeLogPanel = () => {
             <li>
               We're having a test period with SDV Discord to see if there is
               enough interest for the planner channel.{" "}
-              <a href="https://discord.gg/QBqBAzp" target="_blank">
+              <a href="https://discord.gg/QBqBAzp" target="_blank"  rel="noopener noreferrer">>
                 Come join us.
               </a>
             </li>
@@ -88,21 +88,21 @@ const ChangeLogPanel = () => {
           <ul>
             <li>
               We now have a{" "}
-              <a href="https://stardew.info" target="_blank">
+              <a href="https://stardew.info" target="_blank"  rel="noopener noreferrer">>
                 front page!
               </a>
               . Big thanks to{" "}
               <a
                 href="https://dribbble.com/kedin"
                 onclick="ga('send', 'event', 'Karel Eding link', 'Clicked on kedin Dribble link');"
-                target="_blank"
+                target="_blank"  rel="noopener noreferrer">
               >
                 Karel Eding
               </a>{" "}
               for creating the design and{" "}
               <a
                 href="https://upload.farm/"
-                target="_blank"
+                target="_blank"  rel="noopener noreferrer">
                 onclick="ga('send', 'event', 'Upload farm link', 'Clicked on upload.farm link');"
               >
                 Upload.Farm
@@ -114,7 +114,7 @@ const ChangeLogPanel = () => {
               to the list by pledging{" "}
               <a
                 href="https://www.patreon.com/bePatron?c=1239286"
-                target="_blank"
+                target="_blank"  rel="noopener noreferrer">
                 className="patreon-orange"
               >
                 @Patreon
@@ -132,7 +132,7 @@ const ChangeLogPanel = () => {
               more about the technical side of this, you can do so here on{" "}
               <a
                 href="https://medium.com/@hpeinar/migrating-500k-documents-22gb-of-data-from-rethinkdb-to-mysql-for-stardew-planner-bdef4c1d4639"
-                target="_blank"
+                target="_blank"  rel="noopener noreferrer">
               >
                 Medium
               </a>
@@ -159,7 +159,7 @@ const ChangeLogPanel = () => {
               Added Stardew Valley merchandise shop banner.{" "}
               <a
                 href="http://blog.chucklefish.org/shop/#Stardew"
-                target="_blank"
+                target="_blank"  rel="noopener noreferrer">
               >
                 Be sure to get your Junimos!
               </a>
@@ -192,7 +192,7 @@ const ChangeLogPanel = () => {
               <ul>
                 <li>
                   Merged pull request by{" "}
-                  <a href="https://github.com/ClairelyClaire" target="_blank">
+                  <a href="https://github.com/ClairelyClaire" target="_blank"  rel="noopener noreferrer">>
                     ClairelyClaire
                   </a>{" "}
                   to add all the different crops.
@@ -234,7 +234,7 @@ const ChangeLogPanel = () => {
                   Officially integrated stardew.info and upload.farm.{" "}
                   <a
                     href="https://www.reddit.com/r/StardewValley/comments/58g25j/uploadfarm_and_stardewinfo_unite/"
-                    target="_blank"
+                    target="_blank"  rel="noopener noreferrer">
                   >
                     Read more here.
                   </a>
@@ -247,7 +247,7 @@ const ChangeLogPanel = () => {
                   Fixed mining layout importing (
                   <a
                     href="http://community.playstarbound.com/members/gummywyrms.713195/"
-                    target="_blank"
+                    target="_blank"  rel="noopener noreferrer">
                   >
                     gummywyrms
                   </a>
@@ -285,7 +285,7 @@ const ChangeLogPanel = () => {
               <ul>
                 <li>
                   Moved to{" "}
-                  <a href="https://rethinkdb.com/" target="_blank">
+                  <a href="https://rethinkdb.com/" target="_blank"  rel="noopener noreferrer">>
                     RethinkDB
                   </a>{" "}
                   from fs
@@ -304,7 +304,7 @@ const ChangeLogPanel = () => {
                   Removed the cause of the{" "}
                   <a
                     href="https://www.reddit.com/r/StardewValley/comments/4sri6s/stardewinfoplanner_outage/"
-                    target="_blank"
+                    target="_blank"  rel="noopener noreferrer">
                   >
                     last outage
                   </a>
@@ -314,7 +314,7 @@ const ChangeLogPanel = () => {
               <ul>
                 <li>
                   Image exporting by{" "}
-                  <a href="https://github.com/rgson" target="_blank">
+                  <a href="https://github.com/rgson" target="_blank"  rel="noopener noreferrer">>
                     rgson
                   </a>
                 </li>
@@ -327,7 +327,7 @@ const ChangeLogPanel = () => {
                   planner with your own site! More on:{" "}
                   <a
                     href="https://github.com/hpeinar/stardewplanner"
-                    target="_blank"
+                    target="_blank"  rel="noopener noreferrer">
                   >
                     @GitHub
                   </a>
@@ -345,20 +345,20 @@ const ChangeLogPanel = () => {
               <ul>
                 <li>
                   Import icon changed for more convenient one{" "}
-                  <a href="https://github.com/TheLostSoul" target="_blank">
+                  <a href="https://github.com/TheLostSoul" target="_blank"  rel="noopener noreferrer">>
                     TheLostSoul
                   </a>
                 </li>
                 <li>
                   Import now imports large rocks, stumps and logs. Also weeds
                   are fixed now.{" "}
-                  <a href="https://github.com/TheLostSoul" target="_blank">
+                  <a href="https://github.com/TheLostSoul" target="_blank"  rel="noopener noreferrer">>
                     TheLostSoul
                   </a>
                 </li>
                 <li>
                   Added object counter window{" "}
-                  <a href="https://github.com/echoenzo" target="_blank">
+                  <a href="https://github.com/echoenzo" target="_blank"  rel="noopener noreferrer">>
                     echoenzo
                   </a>
                 </li>
@@ -369,7 +369,7 @@ const ChangeLogPanel = () => {
                   Published source on{" "}
                   <a
                     href="https://github.com/hpeinar/stardewplanner"
-                    target="_blank"
+                    target="_blank"  rel="noopener noreferrer">
                   >
                     @GitHub
                   </a>

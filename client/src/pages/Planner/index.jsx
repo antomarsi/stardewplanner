@@ -1,28 +1,30 @@
 import React from "react";
-import NavBar from "../../components/NavBar";
-import PatronsPanel from "../../components/PatronsPanel";
-import CreditsPanel from "../../components/CreditsPanel";
-import ChangeLogPanel from "../../components/ChangeLogPanel";
-import DonatePanel from "../../components/DonatePanel";
 import EditorCanvas from "../../components/EditorCanvas";
 
 // import { Container } from './styles';
 
 const Planner = () => (
   <div className="planner">
-  <NavBar/>
-    <EditorCanvas/>
+    <EditorCanvas />
     <div className="d-none">
       <svg width="1280" height="1040" id="editor"></svg>
       <div className="nexus-notification notification">
         <div className="header">
-          <a href="https://mp.stardew.info/planner" target="_blank">
+          <a
+            href="https://mp.stardew.info/planner"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Multiplanner is here
           </a>
           <div className="hide-nexus-notification hide-notification">HIDE</div>
         </div>
         <div className="content">
-          <a href="https://mp.stardew.info/planner" target="_blank">
+          <a
+            href="https://mp.stardew.info/planner"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Multiplanner
           </a>{" "}
           allows you to simultaneously plan your farm with up to 4 players here,
@@ -36,6 +38,7 @@ const Planner = () => (
             <a
               href="https://www.nexusmods.com/stardewvalley/mods/3787/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               NexusMods
             </a>
@@ -46,6 +49,7 @@ const Planner = () => (
           <a
             href="https://www.facebook.com/groups/stardewplanner/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Facebook group!
           </a>
@@ -60,7 +64,12 @@ const Planner = () => (
       <div className="custom-layout-notification notification">
         <div className="header">You are using modded farm layout!</div>
         <div className="content">
-          <a href="" target="_blank" className="layout-url">
+          <a
+            href="/"
+            target="_blank"
+            className="layout-url"
+            rel="noopener noreferrer"
+          >
             <span className="layout-name">WonderfulLifeFarm</span>
           </a>{" "}
           by <span className="layout-author">taintedwheat & JinxieWinxie</span>
@@ -75,7 +84,12 @@ const Planner = () => (
         </div>
         <div className="content">
           To access your render click here:{" "}
-          <a href="" target="_blank" className="render-url">
+          <a
+            href="/"
+            target="_blank"
+            className="render-url"
+            rel="noopener noreferrer"
+          >
             <span className="render-display-url"></span>
           </a>
           <br />
@@ -87,10 +101,7 @@ const Planner = () => (
         <div className="content"></div>
       </div>
     </div>
-    {
-      //<!-- FAQ and credits -->
-    }
-    <div className="google-notification notification">
+    <div className="google-notification notification d-none">
       <div className="header">
         Ads:
         <div className="hide-google-notification hide-notification">HIDE</div>
