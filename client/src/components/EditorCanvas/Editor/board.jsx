@@ -8,8 +8,8 @@ const Background = ({ bg }) => {
   return <Image image={image} />;
 };
 const Cursor = ({ point: { x, y }, size, width, height }) => {
-  const snapX = Math.floor(x / size) * size;
-  const snapY = Math.floor(y / size) * size;
+  const snapX = Math.min(Math.max(Math.floor(x / size) * size, 0), width-size);
+  const snapY = Math.min(Math.max(Math.floor(y / size) * size, 0), height-size);
   return (
     <Group id="cursor">
       <Rect
@@ -61,7 +61,7 @@ class Board extends Component {
       position: { x: 0, y: 0 },
       moving: false
     };
-    this.scaleBy = 1.01;
+    this.scaleBy = 1.05;
     this.tileSize = 16;
   }
   componentDidMount() {

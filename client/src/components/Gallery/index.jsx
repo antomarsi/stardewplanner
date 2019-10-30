@@ -64,7 +64,7 @@ const Gallery = ({ title, description, planList, loading }) => {
 
 Gallery.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  description: PropTypes.any,
   loading: PropTypes.bool,
   planList: PropTypes.array
 };

@@ -44,7 +44,7 @@ const Home = () => {
               | Page design by{" "}
               <a
                 href="https://dribbble.com/kedin"
-                onclick="ga('send', 'event', 'Karel Eding link', 'Clicked on kedin Dribble link');"
+                onClick="ga('send', 'event', 'Karel Eding link', 'Clicked on kedin Dribble link');"
                 target="_blank"
                 rel="noopener noreferrer"
               >
