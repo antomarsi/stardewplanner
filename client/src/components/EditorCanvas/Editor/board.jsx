@@ -8,8 +8,8 @@ const Background = ({ bg }) => {
   return <Image image={image} />;
 };
 const Cursor = ({ point: { x, y }, size, width, height }) => {
-  const snapX = Math.min(Math.max(Math.floor(x / size) * size, 0), width-size);
-  const snapY = Math.min(Math.max(Math.floor(y / size) * size, 0), height-size);
+  const snapX = x * size;
+  const snapY = y * size;
   return (
     <Group id="cursor">
       <Rect
@@ -63,6 +63,10 @@ class Board extends Component {
     };
     this.scaleBy = 1.05;
     this.tileSize = 16;
+    this.maxCoord = {
+      x: Math.floor(props.layout.width/this.tileSize)-1,
+      y: Math.floor(props.layout.height/this.tileSize)-1,
+    }
   }
   componentDidMount() {
     const { layout } = this.props;
@@ -152,9 +156,16 @@ class Board extends Component {
   };
   getGridPosition = () => {
     const { x, y } = this.state.cursorEditor;
+    const { width, height } = this.props.layout;
     return {
-      x: Math.floor(x / this.tileSize),
-      y: Math.floor(y / this.tileSize)
+      x: Math.min(
+        Math.max(Math.floor(x / this.tileSize), 0),
+        this.maxCoord.x
+      ),
+      y: Math.min(
+        Math.max(Math.floor(y / this.tileSize), 0),
+        this.maxCoord.y
+      )
     };
   };
 
@@ -220,13 +231,24 @@ class Board extends Component {
             <Group id="grid">{grid}</Group>
             <Cursor
               size={this.tileSize}
-              point={this.state.cursorEditor}
+              point={coords}
               width={layout.width}
               height={layout.height}
             />
           </Layer>
           <Layer id="UI">
-            <Text x={20} y={20} text={`${coords.x}, ${coords.y}`} fontFamily={"SW"} fontSize={32} fill={"white"} shadow={true} shadowColor={"black"} shadowOffset={{x:4,y:4}} shadowBlur={4}/>
+            <Text
+              x={20}
+              y={20}
+              text={`${coords.x}, ${coords.y}`}
+              fontFamily={"SW"}
+              fontSize={32}
+              fill={"white"}
+              shadow={true}
+              shadowColor={"black"}
+              shadowOffset={{ x: 4, y: 4 }}
+              shadowBlur={4}
+            />
           </Layer>
         </Stage>
       </div>

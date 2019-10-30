@@ -1,7 +1,7 @@
 import React from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMousePointer, faArrowsAlt } from "@fortawesome/free-solid-svg-icons";
+import { faMousePointer, faArrowsAlt, faRulerCombined, faPaintBrush, faFillDrip } from "@fortawesome/free-solid-svg-icons";
 
 const Toolbar = () => (
   <div className="toolbar">
@@ -11,6 +11,18 @@ const Toolbar = () => (
     </ListGroupItem>
     <ListGroupItem tag="button" action>
       <FontAwesomeIcon icon={faArrowsAlt} />
+    </ListGroupItem>
+    <ListGroupItem tag="button" action>
+      <FontAwesomeIcon icon={faRulerCombined} />
+    </ListGroupItem>
+    <ListGroupItem tag="button" action>
+      <FontAwesomeIcon icon={faPaintBrush} />
+    </ListGroupItem>
+    <ListGroupItem tag="button" action>
+      <FontAwesomeIcon icon={faFillDrip} />
+    </ListGroupItem>
+    <ListGroupItem>
+      <span className="text-primary">T</span>
     </ListGroupItem>
   </ListGroup>
   </div>
