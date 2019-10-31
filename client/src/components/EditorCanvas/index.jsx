@@ -21,7 +21,7 @@ class EditorCanvas extends Component {
       .load(this.refs.canvas, "regular", msg =>
         this.props.SetLoading("CANVAS_LOADING", msg)
       )
-      .then(() => this.props.SetLoading("CANVAS_LOADING", "Loaded"))
+      .then(() => this.props.RemoveLoading("CANVAS_LOADING"))
       .catch(err => {
         console.error(err);
       });

@@ -34,9 +34,10 @@ class JumpingLetters extends Component {
 
   render() {
     return (
-      <div className="message">
+      <div id="loader-message">
         {[...this.props.message].map((letter, index) => (
-          <span key={index}
+          <span
+            key={index}
             className={index === this.state.letterIndexJump ? "jumping" : ""}
           >
             {letter}
@@ -50,23 +51,12 @@ class JumpingLetters extends Component {
 const LoadingComponent = () => {
   const { loading } = useSelector(state => state.loading);
 
-  const loadingClassname = ["spinner-loading"];
-
-  if (!loading || loading.length === 0) {
-    loadingClassname.push("d-none");
-  }
-
+  const hasLoading = loading && loading.length > 0;
+console.log(loading);
   return (
-    <div className={loadingClassname.join(" ")}>
-      <div className="spinners">
-        <Spinner color="yellow" style={{ height: "4rem", width: "4rem" }} />
-        <Spinner
-          color="secondary"
-          type="grow"
-          style={{ height: "4rem", width: "4rem" }}
-        />
-      </div>
-      {loading && loading.length > 0 && loading[0].message && (
+    <div id="loader-wrapper" className={!hasLoading ? "loaded" : ""}>
+      <div id="loader"/>
+      {hasLoading && loading[0].message && (
         <JumpingLetters message={loading[0].message} />
       )}
     </div>
