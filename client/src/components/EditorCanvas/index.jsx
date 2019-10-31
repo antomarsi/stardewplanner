@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Toolbar from "./Toolbar";
 import Engine from "../../services/engine";
+import LoadingComponent from "../LoadingComponent";
 
 class EditorCanvas extends Component {
   constructor() {
@@ -35,6 +36,9 @@ class EditorCanvas extends Component {
   render() {
     return (
       <div className="editor" ref="container">
+        {this.state.loading && (
+          <LoadingComponent message={this.state.loading} />
+        )}
         <canvas
           id="canvas"
           ref="canvas"
