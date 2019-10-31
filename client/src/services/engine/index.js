@@ -1,303 +1,101 @@
-import React, { Component } from "react";
-import Konva from "konva";
-import { Stage, Layer, Line, Image, Group, Rect, Text } from "react-konva";
-import useImage from "use-image";
+import sprites from "../../assets/data/sprites";
+import { loadImage } from "./utils";
+import Building from "./building";
+import layouts from "../../assets/data/layouts";
+import Layout from "./layout";
 
-const Background = ({ bg }) => {
-  const [image] = useImage(require(`../../../assets/img/layouts/${bg}`));
-  return <Image image={image} />;
-};
-const Cursor = ({ point: { x, y }, size, width, height }) => {
-  const snapX = x * size;
-  const snapY = y * size;
-  return (
-    <Group id="cursor">
-      <Rect
-        width={size}
-        height={size}
-        x={snapX}
-        y={snapY}
-        fill={"#add8e6"}
-        opacity={0.5}
-        cornerRadius={5}
-      />
-      <Line
-        stroke={"#000000"}
-        points={[snapX, 0, snapX, height]}
-        strokeWidth={0.5}
-      />
-      <Line
-        stroke={"#000000"}
-        points={[snapX + size, 0, snapX + size, height]}
-        strokeWidth={0.5}
-      />
-      <Line
-        stroke={"#000000"}
-        points={[0, snapY, width, snapY]}
-        strokeWidth={0.5}
-      />
-      <Line
-        stroke={"#000000"}
-        points={[0, snapY + size, width, snapY + size]}
-        strokeWidth={0.5}
-      />
-    </Group>
-  );
-};
-
-class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stageWidth: 1000,
-      tiles: [],
-      buildings: [],
-      house: null,
-      greenhouse: null,
-      grid: [],
-      zoom: 1.0,
-      cursor: { x: 0, y: 0 },
-      cursorEditor: { x: 0, y: 0 },
-      position: { x: 0, y: 0 },
-      moving: false
-    };
-    this.scaleBy = 1.05;
+export default class Engine {
+  constructor() {
+    this.canvas = null;
+    this.layout = null;
     this.tileSize = 16;
-    this.maxCoord = {
-      x: Math.floor(props.layout.width/this.tileSize)-1,
-      y: Math.floor(props.layout.height/this.tileSize)-1,
-    }
-  }
-  componentDidMount() {
-    const { layout } = this.props;
-    const grid = [];
-    const xSize = Math.floor(layout.width / this.tileSize) + 1;
-    const ySize = Math.floor(layout.height / this.tileSize) + 1;
-    let i = 0;
-    for (let x = 0; x < xSize; x++) {
-      const xPos = x * this.tileSize;
-      grid.push(
-        <Line
-          key={i++}
-          points={[xPos, 0, xPos, layout.height]}
-          stroke={"#ddd"}
-          strokeWidth={0.5}
-        />
-      );
-    }
+    this.tiles = [];
+    this.buildings = [];
+    this.grid = null;
+    this.tools = [];
 
-    for (let y = 0; y < ySize; y++) {
-      const yPos = y * this.tileSize;
-      grid.push(
-        <Line
-          key={i++}
-          points={[0, yPos, layout.width, yPos]}
-          stroke={"#ddd"}
-          strokeWidth={0.5}
-        />
-      );
-    }
-    this.setState({ grid });
-    this.checkSize();
-    window.addEventListener("resize", this.checkSize);
-
-    this.stageRef.on("contentContextmenu", e => {
-      e.evt.preventDefault();
-    });
+    this.showHighlights = false;
+    this.house = null;
+    this.greenhouse = null;
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.checkSize);
-  }
+  load = (canvas, layoutName, cb) => {
+    const callback = msg => {
+      cb(msg);
+      console.log(msg);
+    };
+    this.canvas = canvas;
+    callback("Loading Layout");
+    return this.loadLayout(layoutName)
+      .then(layout => {
+        callback("Layout Loaded");
+        this.layout = layout;
+        callback("Loading tiles");
+        return this.loadTiles();
+      })
+      .then(tiles => {
+        callback("Tiles Loaded");
+        this.tiles = tiles;
+        callback("Loading Buildings");
+        return this.loadBuildings();
+      })
+      .then(buildings => {
+        callback("Buildings Loaded");
+        this.buildings = buildings;
+      })
+      .then(() => {
+        callback("Loading Complete");
+      });
+  };
 
-  checkSize = () => {
-    const width = this.container.offsetWidth;
-    this.setState({
-      stageWidth: width
+  loadLayout = layoutName => {
+    let layout = layouts[layoutName];
+    return loadImage(
+      require(`../../assets/img/layouts/${layout.backgroundImage}`)
+    ).then(img => {
+      return new Layout(layout, img);
     });
   };
-  handleMouseClick = e => {
-    if (e.evt.button === 2) {
-    }
-  };
 
-  handleMouseDown = e => {
-    if (e.evt.button === 2 && !this.state.moving) {
-      this.setState({ moving: true });
-    }
-  };
-
-  handleMouseUp = e => {
-    if (e.evt.button === 2 && this.state.moving) {
-      this.setState({ moving: false });
-    }
-  };
-
-  handleMouseMove = e => {
-    // there are several ways to get stage reference
-
-    // first is
-    var stage = e.currentTarget;
-
-    // or this:
-    stage = this.stageRef.getStage();
-
-    // or event this:
-    stage = e.target.getStage();
-    this.setState({
-      cursor: stage.getPointerPosition(),
-      cursorEditor: this.getEditorPosition(this.editorRef)
-    });
-
-    if (this.state.moving) {
-      this.editorRef.move({ x: e.evt.movementX, y: e.evt.movementY });
-      this.editorRef.batchDraw();
-    }
-  };
-  getGridPosition = () => {
-    const { x, y } = this.state.cursorEditor;
-    const { width, height } = this.props.layout;
-    return {
-      x: Math.min(
-        Math.max(Math.floor(x / this.tileSize), 0),
-        this.maxCoord.x
-      ),
-      y: Math.min(
-        Math.max(Math.floor(y / this.tileSize), 0),
-        this.maxCoord.y
+  loadBuildings = () => {
+    const _this = this;
+    let promises = Object.entries(sprites.buildings).map(([key, building]) =>
+      loadImage(require(`../../${building.sprite}`)).then(
+        img =>
+          new Building(
+            _this,
+            key,
+            img,
+            building.width,
+            building.height,
+            building.highlight
+          )
       )
-    };
-  };
-
-  handleWheel = e => {
-    e.evt.preventDefault();
-    const { cursor } = this.state;
-    var oldScale = this.editorRef.scaleX();
-
-    var mousePointTo = {
-      x: cursor.x / oldScale - this.editorRef.x() / oldScale,
-      y: cursor.y / oldScale - this.editorRef.y() / oldScale
-    };
-
-    var newScale =
-      e.evt.deltaY > 0 ? oldScale * this.scaleBy : oldScale / this.scaleBy;
-    this.editorRef.scale({ x: newScale, y: newScale });
-
-    var newPos = {
-      x: -(mousePointTo.x - cursor.x / newScale) * newScale,
-      y: -(mousePointTo.y - cursor.y / newScale) * newScale
-    };
-    this.editorRef.position(newPos);
-    this.editorRef.batchDraw();
-  };
-
-  getEditorPosition = node => {
-    const transform = node.getAbsoluteTransform().copy();
-    transform.invert();
-    return transform.point(this.state.cursor);
-  };
-
-  render() {
-    const { grid, stageWidth } = this.state;
-    const { layout, offsetHeight } = this.props;
-    const coords = this.getGridPosition();
-    return (
-      <div
-        className="editor"
-        ref={node => {
-          this.container = node;
-        }}
-      >
-        <Stage
-          width={stageWidth}
-          height={window.innerHeight - offsetHeight}
-          onMouseMove={this.handleMouseMove}
-          onWheel={this.handleWheel}
-          ref={ref => {
-            this.stageRef = ref;
-          }}
-        >
-          <Layer
-            id="editor"
-            onMouseDown={this.handleMouseDown}
-            onMouseUp={this.handleMouseUp}
-            ref={ref => {
-              this.editorRef = ref;
-            }}
-          >
-            <Group id="background">
-              {layout && <Background bg={layout.backgroundImage} />}
-            </Group>
-            <Group id="grid">{grid}</Group>
-            <Cursor
-              size={this.tileSize}
-              point={coords}
-              width={layout.width}
-              height={layout.height}
-            />
-          </Layer>
-          <Layer id="UI">
-            <Text
-              x={20}
-              y={20}
-              text={`${coords.x}, ${coords.y}`}
-              fontFamily={"SW"}
-              fontSize={32}
-              fill={"white"}
-              shadow={true}
-              shadowColor={"black"}
-              shadowOffset={{ x: 4, y: 4 }}
-              shadowBlur={4}
-            />
-          </Layer>
-        </Stage>
-      </div>
     );
-  }
+    return Promise.all(promises);
+  };
+
+  loadTiles = () => {
+    let promises = sprites.tiles.map(tile =>
+      loadImage(require(`../../assets/img/tiles/${tile}.png`))
+    );
+    return Promise.all(promises);
+  };
+
+  unload() {}
+
+  drawGrid() {}
+
+  drawHelpers() {}
+
+  dragStart() {}
+  /** EVENTS */
+  mouseDown() {}
+  mouseUp() {}
+  mouseMove() {}
+  dragEnd() {}
+  dragMove() {}
 }
-Board.defaultProps = {
-  offsetHeight: 0
-};
-
-export default Board;
-//     this.background = null;
-//     this.brush = new Brush(this);
-//     this.keepHighlights = [];
-//     this.placingBuilding = null;
-//     this.restrictedPath = null;
-//     this.restrictionCheck = true;
-//     this.house = null;
-//     this.greenhouse = null;
-
-//     this.restrictedBuildingArea = null;
-//     this.restrictedTillingArea = null;
-
-//     // load regular layout by default
-//     this.loadLayout(layouts.regular);
-
-//     this.positionHelpers = [this.R.text(0, 30, 'X: 0').attr({fill: 'white', pointerEvents: 'none', opacity: 0}), this.R.text(0, 15, 'Y: 0').attr({fill: 'white', pointerEvents: 'none', opacity: 0})];
-
-//     this.ghostPath = null; // used for debugging...
-//     this.ghostPathPoints = []; // used for debugging...
-//     this.ghosting = false;
-
-//     this.drawGrid();
-//     this.drawHelpers();
-//     this.preDrawSprites();
-
-//     this.R.mousemove(this.mousemove.bind(this));
-
-//     // yes... same event name
-//     this.R.mouseup(this.mousedown.bind(this));
-
-//     // bind keybinds to window
-//     $(window).keydown(this.keydown.bind(this));
-//     $(window).keyup(this.keyup.bind(this));
-
-//     this.R.drag(this.dragMove, this.dragStart, this.dragEnd, this, this, this);
-
-//     return this;
-// }
 
 // Board.prototype.loadLayout = function loadLayout (layout) {
 //     if (this.background) {

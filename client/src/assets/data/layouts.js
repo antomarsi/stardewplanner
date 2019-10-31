@@ -12,7 +12,7 @@ const layouts = {
       "M384,160L544,160L544,288L416,288L416,272L384,272L384,160z", // greenhouse
       "M576,784L688,784L688,800L704,800L704,816L736,816L736,832L752,832L752,896L736,896L736,912L720,912L720,928L672,928L672,944L592,944L592,928L576,928L576,912L544,912L544,880L528,880L528,832L544,832L544,816L560,816L560,800L576,800L576,784z", // middle lake
       "M1216,304L1248,304L1248,288L1264,288L1264,304L1280,304L1280,1040L640,1040L640,992L1104,992L1104,944L1168,944L1168,896L1216,896L1216,528L1200,528L1200,544L1136,544L1136,528L1120,528L1120,448L1200,448L1200,464L1216,464L1216,304z" // right-bottom
-    ].join(""),
+    ],
     buildingRestrictionPath: [
       "M0,0L640,0L640,128L592,128L592,176L512,176L512,128L160,128L160,144L112,144L112,128L64,128L64,144L48,144L48,368L112,368L112,544L80,544L80,560L64,560L64,576L48,576L48,992L640,992L640,1040L0,1040L0,0z", // top-left
       "M400,160L512,160L512,256L480,256L480,288L432,288L432,256L400,256L400,160z", // greenhouse
@@ -21,7 +21,7 @@ const layouts = {
       "M1232,304L1280,304L1280,1040L672,1040L672,992L1104,992L1104,944L1168,944L1168,896L1232,896L1232,304z", // bottom-right
       "M1120,448L1200,448L1200,464L1216,464L1216,512L1216,528L1200,528L1200,544L1136,544L1136,528L1120,528L1120,448z", // right lake
       "M576,784L688,784L688,800L704,800L704,816L736,816L736,832L752,832L752,896L736,896L736,912L720,912L720,928L672,928L672,944L592,944L592,928L576,928L576,912L544,912L544,880L528,880L528,832L544,832L544,816L560,816L560,800L576,800L576,784z" // bottom lake
-    ].join(""),
+    ],
     house: {
       x: 59,
       y: 8
@@ -45,7 +45,7 @@ const layouts = {
       "M672,992,L816,992,L816,912,L992,912,L992,896,L1024,896,L1024,880,L1120,880,L1120,672,L1152,672,L1152,656,L1184,656,L1184,320,L1216,320,L1216,304,L1280,304,L1280,1040,L672,1040z", // left down
       "M0,672,L144,672,L144,688,L256,688,L256,704,L320,704,L320,720,L368,720,L368,736,L400,736,L400,752,L416,752,L416,768,L432,768,L432,800,L448,800,L448,880,L464,880,L464,992,L640,992,L640,1040,L16,1040,L0,1040,L0,672z", // right-down
       "M704,384,L816,384,L816,400,L832,400,L832,416,L864,416,L864,432,L880,432,L880,464,L896,464,L896,480,L928,480,L928,560,L880,560,L880,576,L880,592,L864,592,L864,608,L848,608,L848,624,L800,624,L800,640,L720,640,L720,624,L704,624,L704,608,L672,608,L672,592,L656,592,L656,576,L640,576,L640,560,L624,560,L624,464,L656,464,L656,432,L672,432,L672,416,L688,416,L688,400,L704,400,L704,384z" // middle lake
-    ].join(""),
+    ],
     house: {
       x: 59,
       y: 8
@@ -70,7 +70,7 @@ const layouts = {
       "M0,576,L48,576,L48,608,L64,608,L64,624,L96,624,L96,640,L112,640,L112,752,L80,752,L80,768,L48,768,L48,784,L0,784,L0,576z",
       "M400,160L512,160L512,256L400,256z", // greenhouse
       "M944,176L1088,176L1088,256L1104,256L1104,272L944,272z" // house
-    ].join(""),
+    ],
     house: {
       x: 59,
       y: 8
@@ -96,7 +96,7 @@ const layouts = {
       "M1120,448,L1200,448,L1200,464,L1216,464,L1216,528,L1200,528,L1200,544,L1136,544,L1136,528,L1120,528,L1120,464,L1120,448z",
       "M400,160L512,160L512,256L400,256z", // greenhouse
       "M944,176L1088,176L1088,256L1104,256L1104,272L944,272z" // house
-    ].join(""),
+    ],
     house: {
       x: 59,
       y: 8
@@ -123,7 +123,7 @@ const layouts = {
       "M80,864,L160,864,L160,880,L176,880,L176,944,L160,944,L160,960,L96,960,L96,944,L80,944,L80,880,L80,864z",
       "M400,160L512,160L512,256L400,256z", // greenhouse
       "M944,176L1088,176L1088,256L1104,256L1104,272L944,272z" // house
-    ].join(""),
+    ],
     house: {
       x: 59,
       y: 8
@@ -177,6 +177,7 @@ const layouts = {
     url: "http://www.nexusmods.com/stardewvalley/mods/426/",
     name: "alis-farm-map-edit",
     prettyName: "Ali's Farm map edit",
+    avatar: "img/alis_avatar.jpg",
     backgroundImage: "alis_farm_map_edit.jpg",
     restrictionPath: null,
     house: {
@@ -195,6 +196,7 @@ const layouts = {
     url: "http://www.nexusmods.com/stardewvalley/mods/1266/",
     name: "alis-flower-farm",
     prettyName: "Ali's Flower Farm",
+    avatar: "img/alis_avatar.jpg",
     backgroundImage: "alis_flower_farm_map.jpg",
     restrictionPath: null,
     house: {
@@ -213,6 +215,7 @@ const layouts = {
     url: "http://www.nexusmods.com/stardewvalley/mods/1122/",
     name: "alis-foraging-map",
     prettyName: "Ali's Foraging Map",
+    avatar: "img/alis_avatar.jpg",
     backgroundImage: "alis_foraging_map.jpg",
     restrictionPath: null,
     house: {
@@ -231,6 +234,7 @@ const layouts = {
     url: "http://www.nexusmods.com/stardewvalley/mods/1095/",
     name: "alis-mountain-map",
     prettyName: "Ali's Mountain Farm",
+    avatar: "img/alis_avatar.jpg",
     backgroundImage: "alis_mountain_map.jpg",
     restrictionPath: null,
     house: {
@@ -250,6 +254,7 @@ const layouts = {
       "http://community.playstarbound.com/threads/alis-secret-forest-farm-map-and-buildings.117561/",
     name: "secret-forest",
     prettyName: "Secret Forest",
+    avatar: "img/alis_avatar.jpg",
     backgroundImage: "alis_secret_forest.jpg",
     restrictionPath: null,
     house: {

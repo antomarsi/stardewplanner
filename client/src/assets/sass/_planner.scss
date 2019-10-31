@@ -1,4 +1,17 @@
-/* CARDS*/
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "variables";
+
+/* CANVAS */
+.editor {
+  & > canvas {
+    background-color: $body-bg;
+    display: block;
+  }
+}
+
+/* CARDS */
 .planner {
   .card-  itle {
     font-family: "SW";
@@ -117,10 +130,14 @@
 
 div.toolbar {
   position: absolute;
-  top: 50%;
+  top: calc( 65px + 1rem);
+  left: 1rem;
   -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  & .list-group{
+    text-align: center !important;
+  }
 }

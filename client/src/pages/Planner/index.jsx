@@ -100,26 +100,26 @@ const Planner = () => (
         <div className="header">Object Count</div>
         <div className="content"></div>
       </div>
-    </div>
-    <div className="google-notification notification d-none">
-      <div className="header">
-        Ads:
-        <div className="hide-google-notification hide-notification">HIDE</div>
-      </div>
-      <div className="content" style={{ width: "350px" }}>
-        {
-          //<!-- after-controls -->
-        }
-        <ins
-          className="adsbygoogle"
-          style={{ display: "inline-block", width: "336px", height: "280px" }}
-          data-ad-client="ca-pub-7596140300521041"
-          data-ad-slot="3946693612"
-        ></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        {
-          //<!-- google ads -->
-        }
+      <div className="google-notification notification">
+        <div className="header">
+          Ads:
+          <div className="hide-google-notification hide-notification">HIDE</div>
+        </div>
+        <div className="content" style={{ width: "350px" }}>
+          {
+            //<!-- after-controls -->
+          }
+          <ins
+            className="adsbygoogle"
+            style={{ display: "inline-block", width: "336px", height: "280px" }}
+            data-ad-client="ca-pub-7596140300521041"
+            data-ad-slot="3946693612"
+          ></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          {
+            //<!-- google ads -->
+          }
+        </div>
       </div>
     </div>
   </div>
