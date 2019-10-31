@@ -25,6 +25,7 @@ export default class Engine {
       console.log(msg);
     };
     this.canvas = canvas;
+    this.context = this.canvas.getContext("2d");
     callback("Loading Layout");
     return this.loadLayout(layoutName)
       .then(layout => {
@@ -45,6 +46,7 @@ export default class Engine {
       })
       .then(() => {
         callback("Loading Complete");
+        requestAnimationFrame(() => this.draw())
       });
   };
 
@@ -82,7 +84,25 @@ export default class Engine {
     return Promise.all(promises);
   };
 
-  unload() {}
+  unload() {
+    this.tiles.remove();
+    this.buildings.remove();
+    this.layout.remove();
+    cancelAnimationFrame();
+  }
+
+  clear() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  };
+
+  draw() {
+    this.clear();
+    this.x += 1;
+    this.context.beginPath();
+    this.context.arc(this.x, 75, 50, 0, 2 * Math.PI);
+    this.context.stroke();
+    requestAnimationFrame(() => this.draw())
+  }
 
   drawGrid() {}
 

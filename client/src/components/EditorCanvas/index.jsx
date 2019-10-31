@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Toolbar from "./Toolbar";
 import Engine from "../../services/engine";
-import LoadingComponent from "../LoadingComponent";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { SetLoading, RemoveLoading } from "../../store/ducks/loading/actions";
 
 class EditorCanvas extends Component {
   constructor() {
@@ -16,8 +18,10 @@ class EditorCanvas extends Component {
   componentDidMount() {
     this.checkSize();
     this.engine
-      .load(this.refs.canvas, "regular", msg => this.setState({ loading: msg }))
-      .then(() => this.setState({ loading: null }))
+      .load(this.refs.canvas, "regular", msg =>
+        this.props.SetLoading("CANVAS_LOADING", msg)
+      )
+      .then(() => this.props.SetLoading("CANVAS_LOADING", "Loaded"))
       .catch(err => {
         console.error(err);
       });
@@ -32,13 +36,11 @@ class EditorCanvas extends Component {
   };
   componentWillUnmount() {
     window.removeEventListener("resize", this.checkSize);
+    this.props.RemoveLoading("CANVAS_LOADING");
   }
   render() {
     return (
       <div className="editor" ref="container">
-        {this.state.loading && (
-          <LoadingComponent message={this.state.loading} />
-        )}
         <canvas
           id="canvas"
           ref="canvas"
@@ -50,5 +52,16 @@ class EditorCanvas extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      SetLoading,
+      RemoveLoading
+    },
+    dispatch
+  );
 
-export default EditorCanvas;
+export default connect(
+  null,
+  mapDispatchToProps
+)(EditorCanvas);
