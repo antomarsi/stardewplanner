@@ -13,6 +13,16 @@ export default class Engine {
     this.buildings = [];
     this.grid = null;
     this.tools = [];
+    this.position = {
+      x: 0,
+      y: 0
+    };
+    this.scale = 1;
+    this.scaleBy = 1.05;
+    this.mousePosition = {
+      x: 0,
+      y: 0
+    };
 
     this.showHighlights = false;
     this.house = null;
@@ -29,25 +39,37 @@ export default class Engine {
     callback("Loading Layout");
     return this.loadLayout(layoutName)
       .then(layout => {
-        callback("Layout Loaded");
         this.layout = layout;
         callback("Loading tiles");
         return this.loadTiles();
       })
       .then(tiles => {
-        callback("Tiles Loaded");
         this.tiles = tiles;
         callback("Loading Buildings");
         return this.loadBuildings();
       })
       .then(buildings => {
-        callback("Buildings Loaded");
         this.buildings = buildings;
       })
       .then(() => {
+        callback("Binding Events");
+        return this.loadBindings();
+      })
+      .then(() => {
         callback("Loading Complete");
-        requestAnimationFrame(() => this.draw())
+        requestAnimationFrame(() => this.draw());
       });
+  };
+  loadBindings = () => {
+    return new Promise((resolve, reject) => {
+      this.canvas.addEventListener("mousemove", this.onMouseMove);
+      this.canvas.addEventListener("mousedown", this.onMouseDown);
+      this.canvas.addEventListener("mouseup", this.onMouseUp);
+      this.canvas.addEventListener("mouseout", this.onMouseOut);
+      this.canvas.addEventListener("contextmenu", e => e.preventDefault());
+      this.canvas.addEventListener("wheel", this.onMouseWheel);
+      resolve(true);
+    });
   };
 
   loadLayout = layoutName => {
@@ -57,6 +79,24 @@ export default class Engine {
     ).then(img => {
       return new Layout(layout, img);
     });
+  };
+
+  getMousePos = e => {
+    var rect = this.canvas.getBoundingClientRect();
+    return {
+      x: Math.round(
+        ((e.clientX - rect.left) / (rect.right - rect.left)) * this.canvas.width
+      ),
+      y: Math.round(
+        ((e.clientY - rect.top) / (rect.bottom - rect.top)) * this.canvas.height
+      )
+    };
+  };
+  get MousePointTo() {
+    return {
+      x: this.mousePosition.x / this.scale - this.position.x / this.scale,
+      y: this.mousePosition.y / this.scale - this.position.y / this.scale
+    };
   };
 
   loadBuildings = () => {
@@ -93,28 +133,116 @@ export default class Engine {
 
   clear() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  };
+  }
 
   draw() {
     this.clear();
-    this.x += 1;
-    this.context.beginPath();
-    this.context.arc(this.x, 75, 50, 0, 2 * Math.PI);
-    this.context.stroke();
-    requestAnimationFrame(() => this.draw())
+    this.context.save();
+    this.context.scale(this.scale, this.scale);
+    this.drawMap();
+    this.drawGrid();
+    this.context.restore();
+    this.drawHelpers();
+    requestAnimationFrame(() => this.draw());
   }
 
-  drawGrid() {}
+  drawMap() {
+    this.context.drawImage(this.layout.image, this.position.x, this.position.y);
+  }
 
-  drawHelpers() {}
+  drawGrid() {
+    this.context.strokeStyle = "rgba(0.3, 0.3, 0.3, 0.7)";
+    const gridCount = this.layout.getGridSize(this.tileSize);
+    for (let x = 0; x < gridCount.x; x++) {
+      let pos = this.position.x + x * this.tileSize;
+      this.context.beginPath();
+      this.context.lineWidth = 1;
+      this.context.moveTo(pos, this.position.y);
+      this.context.lineTo(pos, this.position.y + this.layout.height);
+      this.context.stroke();
+    }
+    for (let y = 0; y < gridCount.y; y++) {
+      let pos = this.position.y + y * this.tileSize;
+      this.context.beginPath();
+      this.context.lineWidth = 1;
+      this.context.moveTo(this.position.x, pos);
+      this.context.lineTo(this.position.x + this.layout.width, pos);
+      this.context.stroke();
+    }
+  }
+  getMouseGridPos() {
+    let mousePointTo = this.MousePointTo;
+    const gridCount = this.layout.getGridSize(this.tileSize);
+    return {
+      x: Math.min(Math.max(Math.floor(mousePointTo.x / this.tileSize), 0), gridCount.x-1),
+      y: Math.min(Math.max(Math.floor(mousePointTo.y / this.tileSize), 0), gridCount.y-1)
+    }
+  }
 
-  dragStart() {}
+  drawHelpers() {
+    // Display mouse position... on the mouse
+    this.context.fillStyle = "#ffffff";
+    this.context.font = "18px SW";
+    this.context.shadowBlur = 4;
+    this.context.shadowOffsetX = 3;
+    this.context.shadowOffsetY = 3;
+    this.context.fillText(
+      `${this.mousePosition.x}, ${this.mousePosition.y}`,
+      this.mousePosition.x,
+      this.mousePosition.y
+    );
+    this.context.fillText(
+      `${this.MousePointTo.x}, ${this.MousePointTo.y}`,
+      this.mousePosition.x,
+      this.mousePosition.y-50
+    );
+    const gridPos = this.getMouseGridPos();
+    this.context.font = "48px SW";
+    this.context.fillText(
+      `${gridPos.x}, ${gridPos.y}`,
+      10,
+      50
+    );
+  }
+
   /** EVENTS */
-  mouseDown() {}
-  mouseUp() {}
-  mouseMove() {}
-  dragEnd() {}
-  dragMove() {}
+  onMouseMove = evt => {
+    this.mousePosition = this.getMousePos(evt);
+    if (this.moving) {
+      this.position.x += evt.movementX / this.scale;
+      this.position.y += evt.movementY / this.scale;
+    }
+  };
+  onMouseDown = evt => {
+    evt.preventDefault();
+    if (evt.button == 2) {
+      this.moving = true;
+    }
+  };
+  onMouseUp = evt => {
+    evt.preventDefault();
+    if (evt.button == 2) {
+      this.moving = false;
+    }
+  };
+  onMouseOut = evt => {
+    evt.preventDefault();
+  };
+  onMouseWheel = evt => {
+    evt.preventDefault();
+    var oldScale = this.scale;
+
+    var mousePointTo = this.MousePointTo;
+    var newScale =
+      evt.deltaY > 0 ? oldScale * this.scaleBy : oldScale / this.scaleBy;
+    this.scale = newScale;
+
+    var newPos = {
+      x: -(mousePointTo.x - this.mousePosition.x / newScale) * newScale,
+      y: -(mousePointTo.y - this.mousePosition.y / newScale) * newScale
+    };
+    this.position = newPos;
+  };
 }
 
 // Board.prototype.loadLayout = function loadLayout (layout) {

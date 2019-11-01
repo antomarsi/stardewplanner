@@ -26,6 +26,12 @@ class Layout {
     this.url = obj.url;
     this.avatar = obj.avatar;
   }
+  getGridSize(tilesize) {
+    return {
+      x: Math.floor(this.width / tilesize),
+      y: Math.floor(this.height / tilesize),
+    }
+  }
 }
 
 export default Layout;
