@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Spinner } from "reactstrap";
 import { useSelector } from "react-redux";
 
 class JumpingLetters extends Component {

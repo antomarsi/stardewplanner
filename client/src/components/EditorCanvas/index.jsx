@@ -18,7 +18,7 @@ class EditorCanvas extends Component {
   componentDidMount() {
     this.checkSize();
     this.engine
-      .load(this.refs.canvas, "regular", msg =>
+      .load(this.refs.canvas, this.refs.canvasUI, "regular", msg =>
         this.props.SetLoading("CANVAS_LOADING", msg)
       )
       .then(() => this.props.RemoveLoading("CANVAS_LOADING"))
@@ -44,6 +44,13 @@ class EditorCanvas extends Component {
         <canvas
           id="canvas"
           ref="canvas"
+          width={this.state.stageWidth}
+          height={window.innerHeight - this.offsetHeight}
+        />
+        <canvas
+          id="canvasUI"
+          className="UI"
+          ref="canvasUI"
           width={this.state.stageWidth}
           height={window.innerHeight - this.offsetHeight}
         />

@@ -28,7 +28,7 @@ const NavBar = () => {
   const toggleNavbar = () => setCollapsed(!collapsed);
   return (
     <Navbar color="dark" dark fixed="top" expand="md">
-      <NavbarBrand href="/">
+      <NavbarBrand tag={RRNavLink} to="/" exact>
         Stardew planner <small className="text-muted">v2</small>
       </NavbarBrand>
       <NavbarToggler onClick={toggleNavbar} className="mr-2" />

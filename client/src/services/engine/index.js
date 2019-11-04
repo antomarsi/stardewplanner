@@ -1,12 +1,14 @@
 import sprites from "../../assets/data/sprites";
-import { loadImage } from "./utils";
+import { loadImage, GreenHouseEnum } from "./utils";
 import Building from "./building";
 import layouts from "../../assets/data/layouts";
 import Layout from "./layout";
 
 export default class Engine {
+  //#region Constructor
   constructor() {
     this.canvas = null;
+    this.canvasUI = null;
     this.layout = null;
     this.tileSize = 16;
     this.tiles = [];
@@ -23,19 +25,24 @@ export default class Engine {
       x: 0,
       y: 0
     };
+    this.highlightPattern = null;
 
     this.showHighlights = false;
-    this.house = null;
-    this.greenhouse = null;
+    this.house = true;
+    this.greenhouse = GreenHouseEnum.NOT_FIXED;
   }
+  //#endregion
 
-  load = (canvas, layoutName, cb) => {
+  //#region LoadProcesses
+  load = (canvas, canvasUI, layoutName, cb) => {
     const callback = msg => {
       cb(msg);
       console.log(msg);
     };
     this.canvas = canvas;
-    this.context = this.canvas.getContext("2d");
+    this.canvasUI = canvasUI;
+    this.ctx = this.canvas.getContext("2d");
+    this.ctxUI = this.canvas.getContext("2d");
     callback("Loading Layout");
     return this.loadLayout(layoutName)
       .then(layout => {
@@ -50,6 +57,11 @@ export default class Engine {
       })
       .then(buildings => {
         this.buildings = buildings;
+        return loadImage(require(`../../assets/img/highlight.png`)).then(
+          img => {
+            this.highlightPattern = this.ctx.createPattern(img, `repeat`);
+          }
+        );
       })
       .then(() => {
         callback("Binding Events");
@@ -60,14 +72,15 @@ export default class Engine {
         requestAnimationFrame(() => this.draw());
       });
   };
+
   loadBindings = () => {
     return new Promise((resolve, reject) => {
-      this.canvas.addEventListener("mousemove", this.onMouseMove);
-      this.canvas.addEventListener("mousedown", this.onMouseDown);
-      this.canvas.addEventListener("mouseup", this.onMouseUp);
-      this.canvas.addEventListener("mouseout", this.onMouseOut);
-      this.canvas.addEventListener("contextmenu", e => e.preventDefault());
-      this.canvas.addEventListener("wheel", this.onMouseWheel);
+      this.canvasUI.addEventListener("mousemove", this.onMouseMove);
+      this.canvasUI.addEventListener("mousedown", this.onMouseDown);
+      this.canvasUI.addEventListener("mouseup", this.onMouseUp);
+      this.canvasUI.addEventListener("mouseout", this.onMouseOut);
+      this.canvasUI.addEventListener("contextmenu", e => e.preventDefault());
+      this.canvasUI.addEventListener("wheel", this.onMouseWheel);
       resolve(true);
     });
   };
@@ -79,24 +92,6 @@ export default class Engine {
     ).then(img => {
       return new Layout(layout, img);
     });
-  };
-
-  getMousePos = e => {
-    var rect = this.canvas.getBoundingClientRect();
-    return {
-      x: Math.round(
-        ((e.clientX - rect.left) / (rect.right - rect.left)) * this.canvas.width
-      ),
-      y: Math.round(
-        ((e.clientY - rect.top) / (rect.bottom - rect.top)) * this.canvas.height
-      )
-    };
-  };
-  get MousePointTo() {
-    return {
-      x: this.mousePosition.x / this.scale - this.position.x / this.scale,
-      y: this.mousePosition.y / this.scale - this.position.y / this.scale
-    };
   };
 
   loadBuildings = () => {
@@ -130,82 +125,159 @@ export default class Engine {
     this.layout.remove();
     cancelAnimationFrame();
   }
+  // #endregion
+  getBuilding = id => {
+    return this.buildings.find(b => b.id === id);
+  };
 
+  //#region Mouse Helpers
+  getMousePos = e => {
+    var rect = this.canvas.getBoundingClientRect();
+    return {
+      x:
+        ((e.clientX - rect.left) / (rect.right - rect.left)) *
+        this.canvas.width,
+      y:
+        ((e.clientY - rect.top) / (rect.bottom - rect.top)) * this.canvas.height
+    };
+  };
+
+  getMouseGridPos() {
+    let mousePointTo = this.MousePointTo();
+    const gridCount = this.layout.getGridSize(this.tileSize);
+    return {
+      x: Math.min(
+        Math.max(Math.floor(mousePointTo.x / this.tileSize), 0),
+        gridCount.x - 1
+      ),
+      y: Math.min(
+        Math.max(Math.floor(mousePointTo.y / this.tileSize), 0),
+        gridCount.y - 1
+      )
+    };
+  }
+
+  MousePointTo = () => {
+    return {
+      x: this.mousePosition.x / this.scale - this.position.x,
+      y: this.mousePosition.y / this.scale - this.position.y
+    };
+  };
+  //#endregion
+
+  //#region Draw Processes
   clear() {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   draw() {
     this.clear();
-    this.context.save();
-    this.context.scale(this.scale, this.scale);
+    this.ctx.save();
+    const { x1, y1 } = this.MousePointTo();
+    this.ctx.translate(x1, y1);
+    this.ctx.scale(this.scale, this.scale);
+    const { x2, y2 } = this.MousePointTo();
+    this.ctx.translate(-x2, -y2);
     this.drawMap();
-    this.drawGrid();
-    this.context.restore();
+    this.ctx.restore();
     this.drawHelpers();
     requestAnimationFrame(() => this.draw());
   }
 
   drawMap() {
-    this.context.drawImage(this.layout.image, this.position.x, this.position.y);
+    this.ctx.drawImage(this.layout.image, this.position.x, this.position.y);
+    if (this.house) {
+      let house = this.getBuilding("house");
+      let { x, y } = this.layout.getHousePosition(this.tileSize);
+      this.ctx.drawImage(house.image, this.position.x + x, this.position.y + y);
+    }
+    if (this.greenhouse !== GreenHouseEnum.NONE) {
+      let greenhouse = null;
+      if (GreenHouseEnum.NOT_FIXED === this.greenhouse) {
+        greenhouse = this.getBuilding("greenhouse");
+      } else if (GreenHouseEnum.FIXED === this.greenhouse) {
+        greenhouse = this.getBuilding("greenhouse-fixed");
+      }
+      let { x, y } = this.layout.getGreenhousePosition(this.tileSize);
+      this.ctx.drawImage(
+        greenhouse.image,
+        this.position.x + x,
+        this.position.y + y
+      );
+    }
+    this.drawGrid();
   }
 
   drawGrid() {
-    this.context.strokeStyle = "rgba(0.3, 0.3, 0.3, 0.7)";
+    // Draw map grid
+    this.ctx.strokeStyle = "#808080";
+    this.ctx.lineWidth = 0.5;
     const gridCount = this.layout.getGridSize(this.tileSize);
     for (let x = 0; x < gridCount.x; x++) {
       let pos = this.position.x + x * this.tileSize;
-      this.context.beginPath();
-      this.context.lineWidth = 1;
-      this.context.moveTo(pos, this.position.y);
-      this.context.lineTo(pos, this.position.y + this.layout.height);
-      this.context.stroke();
+      this.ctx.beginPath();
+      this.ctx.moveTo(pos, this.position.y);
+      this.ctx.lineTo(pos, this.position.y + this.layout.height);
+      this.ctx.stroke();
+      this.ctx.closePath();
     }
     for (let y = 0; y < gridCount.y; y++) {
       let pos = this.position.y + y * this.tileSize;
-      this.context.beginPath();
-      this.context.lineWidth = 1;
-      this.context.moveTo(this.position.x, pos);
-      this.context.lineTo(this.position.x + this.layout.width, pos);
-      this.context.stroke();
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.position.x, pos);
+      this.ctx.lineTo(this.position.x + this.layout.width, pos);
+      this.ctx.stroke();
+      this.ctx.closePath();
     }
-  }
-  getMouseGridPos() {
-    let mousePointTo = this.MousePointTo;
-    const gridCount = this.layout.getGridSize(this.tileSize);
-    return {
-      x: Math.min(Math.max(Math.floor(mousePointTo.x / this.tileSize), 0), gridCount.x-1),
-      y: Math.min(Math.max(Math.floor(mousePointTo.y / this.tileSize), 0), gridCount.y-1)
-    }
+    // Draw Restriction
+      this.layout.drawPathRestrictions(this.ctx, this.position, 1.2)
+
+    //Draw Mouse Tile
+    this.ctxUI.beginPath();
+    this.ctx.moveTo(this.position.x, this.position.y);
+    this.ctxUI.lineWidth = 1;
+    this.ctxUI.strokeStyle = "red";
+    const gridPos = this.getMouseGridPos();
+    this.ctxUI.rect(
+      gridPos.x * this.tileSize + this.position.x,
+      gridPos.y * this.tileSize + this.position.y,
+      this.tileSize,
+      this.tileSize
+    );
+    this.ctx.stroke();
+    this.ctx.closePath();
   }
 
   drawHelpers() {
+    const mousePointTo = this.MousePointTo();
     // Display mouse position... on the mouse
-    this.context.fillStyle = "#ffffff";
-    this.context.font = "18px SW";
-    this.context.shadowBlur = 4;
-    this.context.shadowOffsetX = 3;
-    this.context.shadowOffsetY = 3;
-    this.context.fillText(
-      `${this.mousePosition.x}, ${this.mousePosition.y}`,
+    this.ctxUI.fillStyle = "#ffffff";
+    this.ctxUI.font = "18px SW";
+    this.ctxUI.shadowBlur = 4;
+    this.ctxUI.shadowOffsetX = 3;
+    this.ctxUI.shadowOffsetY = 3;
+    this.ctxUI.fillText(
+      `MP: ${this.mousePosition.x}, ${this.mousePosition.y}`,
       this.mousePosition.x,
       this.mousePosition.y
     );
-    this.context.fillText(
-      `${this.MousePointTo.x}, ${this.MousePointTo.y}`,
+    this.ctxUI.fillText(
+      `MPTo: ${mousePointTo.x.toFixed(1)}, ${mousePointTo.y.toFixed(1)}`,
       this.mousePosition.x,
-      this.mousePosition.y-50
+      this.mousePosition.y - 20
     );
+    // Grid Helper
     const gridPos = this.getMouseGridPos();
-    this.context.font = "48px SW";
-    this.context.fillText(
-      `${gridPos.x}, ${gridPos.y}`,
+    this.ctxUI.font = "48px SW";
+    this.ctxUI.fillText(
+      `${gridPos.x}, ${gridPos.y}, ${this.position.x}, ${this.position.y}`,
       10,
       50
     );
   }
+  //#endregion
 
-  /** EVENTS */
+  //#region MOUSE EVENTS
   onMouseMove = evt => {
     this.mousePosition = this.getMousePos(evt);
     if (this.moving) {
@@ -213,36 +285,36 @@ export default class Engine {
       this.position.y += evt.movementY / this.scale;
     }
   };
+
   onMouseDown = evt => {
     evt.preventDefault();
-    if (evt.button == 2) {
+    if (evt.button === 2) {
       this.moving = true;
     }
   };
+
   onMouseUp = evt => {
     evt.preventDefault();
-    if (evt.button == 2) {
+    if (evt.button === 2) {
       this.moving = false;
     }
   };
+
   onMouseOut = evt => {
     evt.preventDefault();
   };
+
   onMouseWheel = evt => {
     evt.preventDefault();
+    console.log("onMouseWheel");
     var oldScale = this.scale;
 
-    var mousePointTo = this.MousePointTo;
+    var mousePointTo = this.MousePointTo();
     var newScale =
       evt.deltaY > 0 ? oldScale * this.scaleBy : oldScale / this.scaleBy;
     this.scale = newScale;
-
-    var newPos = {
-      x: -(mousePointTo.x - this.mousePosition.x / newScale) * newScale,
-      y: -(mousePointTo.y - this.mousePosition.y / newScale) * newScale
-    };
-    this.position = newPos;
   };
+  //#endregion
 }
 
 // Board.prototype.loadLayout = function loadLayout (layout) {
