@@ -71,42 +71,42 @@ var data = {
   ],
   buildings: {
     well: {
-      sprite: "assets/img/tiles/well.png",
+      sprite: "tiles/well.png",
       width: 3 * 16,
       height: 3 * 16
     },
     silo: {
-      sprite: "assets/img/tiles/silo.png",
+      sprite: "tiles/silo.png",
       width: 3 * 16,
       height: 3 * 16
     },
     barn: {
-      sprite: "assets/img/tiles/barn.png",
+      sprite: "tiles/barn.png",
       width: 7 * 16,
       height: 4 * 16
     },
     "big-barn": {
-      sprite: "assets/img/tiles/big-barn.png",
+      sprite: "tiles/big-barn.png",
       width: 7 * 16,
       height: 4 * 16
     },
     placeholder: {
-      sprite: "assets/img/tiles/placeholder.png",
+      sprite: "tiles/placeholder.png",
       width: 16,
       height: 16
     },
     coop: {
-      sprite: "assets/img/tiles/coop.png",
+      sprite: "tiles/coop.png",
       width: 6 * 16,
       height: 3 * 16
     },
     stable: {
-      sprite: "assets/img/tiles/stable.png",
+      sprite: "tiles/stable.png",
       width: 4 * 16,
       height: 2 * 16
     },
     sprinkler: {
-      sprite: "assets/img/tiles/sprinkler.png",
+      sprite: "tiles/sprinkler.png",
       width: 16,
       height: 16,
       highlight: {
@@ -131,7 +131,7 @@ var data = {
       }
     },
     "q-sprinkler": {
-      sprite: "assets/img/tiles/q-sprinkler.png",
+      sprite: "tiles/q-sprinkler.png",
       width: 16,
       height: 16,
       highlight: {
@@ -141,7 +141,7 @@ var data = {
       }
     },
     "irid-sprinkler": {
-      sprite: "assets/img/tiles/irid-sprinkler.png",
+      sprite: "tiles/irid-sprinkler.png",
       width: 16,
       height: 16,
       highlight: {
@@ -151,7 +151,7 @@ var data = {
       }
     },
     scarecrow: {
-      sprite: "assets/img/tiles/scarecrow.png",
+      sprite: "tiles/scarecrow.png",
       width: 16,
       height: 16,
       highlight: {
@@ -200,182 +200,182 @@ var data = {
       }
     },
     chest: {
-      sprite: "assets/img/tiles/chest.png",
+      sprite: "tiles/chest.png",
       width: 16,
       height: 16
     },
     "wood-sign": {
-      sprite: "assets/img/tiles/wood-sign.png",
+      sprite: "tiles/wood-sign.png",
       width: 16,
       height: 16
     },
     furnace: {
-      sprite: "assets/img/tiles/furnace.png",
+      sprite: "tiles/furnace.png",
       width: 16,
       height: 16
     },
     mayo: {
-      sprite: "assets/img/tiles/mayo.png",
+      sprite: "tiles/mayo.png",
       width: 16,
       height: 16
     },
     "mayonnaise-machine": {
-      sprite: "assets/img/tiles/mayo.png",
+      sprite: "tiles/mayo.png",
       width: 16,
       height: 16
     },
     "cheese-press": {
-      sprite: "assets/img/tiles/cheese-press.png",
+      sprite: "tiles/cheese-press.png",
       width: 16,
       height: 16
     },
     keg: {
-      sprite: "assets/img/tiles/keg.png",
+      sprite: "tiles/keg.png",
       width: 16,
       height: 16
     },
     loom: {
-      sprite: "assets/img/tiles/loom.png",
+      sprite: "tiles/loom.png",
       width: 16,
       height: 16
     },
     preserves: {
-      sprite: "assets/img/tiles/preserves.png",
+      sprite: "tiles/preserves.png",
       width: 16,
       height: 16
     },
     "preserves-jar": {
-      sprite: "assets/img/tiles/preserves.png",
+      sprite: "tiles/preserves.png",
       width: 16,
       height: 16
     },
     "oil-maker": {
-      sprite: "assets/img/tiles/oil-maker.png",
+      sprite: "tiles/oil-maker.png",
       width: 16,
       height: 16
     },
     charcoal: {
-      sprite: "assets/img/tiles/charcoal.png",
+      sprite: "tiles/charcoal.png",
       width: 16,
       height: 16
     },
     "charcoal-kiln": {
-      sprite: "assets/img/tiles/charcoal.png",
+      sprite: "tiles/charcoal.png",
       width: 16,
       height: 16
     },
     crystalarium: {
-      sprite: "assets/img/tiles/crystal.png",
+      sprite: "tiles/crystal.png",
       width: 16,
       height: 16
     },
     crystal: {
-      sprite: "assets/img/tiles/crystal.png",
+      sprite: "tiles/crystal.png",
       width: 16,
       height: 16
     },
     "egg-press": {
-      sprite: "assets/img/tiles/egg-press.png",
+      sprite: "tiles/egg-press.png",
       width: 16,
       height: 16
     },
     "slime-egg-press": {
-      sprite: "assets/img/tiles/egg-press.png",
+      sprite: "tiles/egg-press.png",
       width: 16,
       height: 16
     },
     "statue-of-endless-fortune": {
-      sprite: "assets/img/tiles/statue-of-endless-fortune.png",
+      sprite: "tiles/statue-of-endless-fortune.png",
       width: 16,
       height: 16
     },
     "lightning-rod": {
-      sprite: "assets/img/tiles/lighting-rod.png",
+      sprite: "tiles/lighting-rod.png",
       width: 16,
       height: 16
     },
     "lighting-rod": {
-      sprite: "assets/img/tiles/lighting-rod.png",
+      sprite: "tiles/lighting-rod.png",
       width: 16,
       height: 16
     },
     "recycling-machine": {
-      sprite: "assets/img/tiles/recycling-machine.png",
+      sprite: "tiles/recycling-machine.png",
       width: 16,
       height: 16
     },
     "seed-maker": {
-      sprite: "assets/img/tiles/seed-maker.png",
+      sprite: "tiles/seed-maker.png",
       width: 16,
       height: 16
     },
     "slime-incubator": {
-      sprite: "assets/img/tiles/slime-incubator.png",
+      sprite: "tiles/slime-incubator.png",
       width: 16,
       height: 16
     },
     "worm-bin": {
-      sprite: "assets/img/tiles/worm-bin.png",
+      sprite: "tiles/worm-bin.png",
       width: 16,
       height: 16
     },
     "cherry-tree": {
-      sprite: "assets/img/tiles/cherry-tree.png",
+      sprite: "tiles/cherry-tree.png",
       width: 48,
       height: 48
     },
     "orange-tree": {
-      sprite: "assets/img/tiles/orange-tree.png",
+      sprite: "tiles/orange-tree.png",
       width: 48,
       height: 48
     },
     "oak-tree": {
-      sprite: "assets/img/tiles/oak-tree.png",
+      sprite: "tiles/oak-tree.png",
       width: 48,
       height: 48
     },
     "maple-tree": {
-      sprite: "assets/img/tiles/maple-tree.png",
+      sprite: "tiles/maple-tree.png",
       width: 48,
       height: 48
     },
     "pine-tree": {
-      sprite: "assets/img/tiles/pine-tree.png",
+      sprite: "tiles/pine-tree.png",
       width: 48,
       height: 48
     },
     apple: {
-      sprite: "assets/img/tiles/apple.png",
+      sprite: "tiles/apple.png",
       width: 48,
       height: 48
     },
     apricot: {
-      sprite: "assets/img/tiles/apricot.png",
+      sprite: "tiles/apricot.png",
       width: 48,
       height: 48
     },
     peach: {
-      sprite: "assets/img/tiles/peach.png",
+      sprite: "tiles/peach.png",
       width: 48,
       height: 48
     },
     pomegranate: {
-      sprite: "assets/img/tiles/pomegranate.png",
+      sprite: "tiles/pomegranate.png",
       width: 48,
       height: 48
     },
     "slime-hutch": {
-      sprite: "assets/img/tiles/slime-hutch.png",
+      sprite: "tiles/slime-hutch.png",
       width: 176,
       height: 96
     },
     gate: {
-      sprite: "assets/img/tiles/gate.png",
+      sprite: "tiles/gate.png",
       width: 16,
       height: 16
     },
     "bee-hive": {
-      sprite: "assets/img/tiles/bee-hive.png",
+      sprite: "tiles/bee-hive.png",
       width: 16,
       height: 16,
       highlight: {
@@ -426,119 +426,119 @@ var data = {
       }
     },
     torch: {
-      sprite: "assets/img/tiles/torch.png",
+      sprite: "tiles/torch.png",
       width: 16,
       height: 16
     },
     campfire: {
-      sprite: "assets/img/tiles/campfire.png",
+      sprite: "tiles/campfire.png",
       width: 16,
       height: 16
     },
     "wooden-brazier": {
-      sprite: "assets/img/tiles/wooden-brazier.png",
+      sprite: "tiles/wooden-brazier.png",
       width: 16,
       height: 16
     },
     "stone-brazier": {
-      sprite: "assets/img/tiles/stone-brazier.png",
+      sprite: "tiles/stone-brazier.png",
       width: 16,
       height: 16
     },
     "gold-brazier": {
-      sprite: "assets/img/tiles/gold-brazier.png",
+      sprite: "tiles/gold-brazier.png",
       width: 16,
       height: 16
     },
     "carved-brazier": {
-      sprite: "assets/img/tiles/carved-brazier.png",
+      sprite: "tiles/carved-brazier.png",
       width: 16,
       height: 16
     },
     "stump-brazier": {
-      sprite: "assets/img/tiles/stump-brazier.png",
+      sprite: "tiles/stump-brazier.png",
       width: 16,
       height: 16
     },
     "barrel-brazier": {
-      sprite: "assets/img/tiles/barrel-brazier.png",
+      sprite: "tiles/barrel-brazier.png",
       width: 16,
       height: 16
     },
     "skull-brazier": {
-      sprite: "assets/img/tiles/skull-brazier.png",
+      sprite: "tiles/skull-brazier.png",
       width: 16,
       height: 16
     },
     "marble-brazier": {
-      sprite: "assets/img/tiles/marble-brazier.png",
+      sprite: "tiles/marble-brazier.png",
       width: 16,
       height: 16
     },
     "wood-lamp-post": {
-      sprite: "assets/img/tiles/wood-lamp-post.png",
+      sprite: "tiles/wood-lamp-post.png",
       width: 16,
       height: 16
     },
     "iron-lamp-post": {
-      sprite: "assets/img/tiles/iron-lamp-post.png",
+      sprite: "tiles/iron-lamp-post.png",
       width: 16,
       height: 16
     },
     "large-log": {
-      sprite: "assets/img/tiles/large-log.png",
+      sprite: "tiles/large-log.png",
       width: 32,
       height: 32
     },
     "large-rock": {
-      sprite: "assets/img/tiles/large-rock.png",
+      sprite: "tiles/large-rock.png",
       width: 32,
       height: 32
     },
     "large-stump": {
-      sprite: "assets/img/tiles/large-stump.png",
+      sprite: "tiles/large-stump.png",
       width: 32,
       height: 32
     },
     house: {
       width: 144,
       height: 144,
-      sprite: "assets/img/tiles/house.png"
+      sprite: "tiles/house.png"
     },
     greenhouse: {
       width: 112,
       height: 160,
-      sprite: "assets/img/tiles/greenhouse-broken.png"
+      sprite: "tiles/greenhouse-broken.png"
     },
     "greenhouse-fixed": {
       width: 112,
       height: 160,
-      sprite: "assets/img/tiles/greenhouse-fixed.png"
+      sprite: "tiles/greenhouse-fixed.png"
     },
     "earth-obelisk": {
       width: 3 * 16,
       height: 3 * 16,
-      sprite: "assets/img/tiles/earth-obelisk.png"
+      sprite: "tiles/earth-obelisk.png"
     },
     "water-obelisk": {
       width: 3 * 16,
       height: 3 * 16,
-      sprite: "assets/img/tiles/water-obelisk.png"
+      sprite: "tiles/water-obelisk.png"
     },
     "gold-clock": {
       width: 3 * 16,
       height: 2 * 16,
-      sprite: "assets/img/tiles/gold-clock.png"
+      sprite: "tiles/gold-clock.png"
     },
     mill: {
       width: 4 * 16,
       height: 2 * 16,
-      sprite: "assets/img/tiles/mill.png"
+      sprite: "tiles/mill.png"
     },
     "junimo-hut": {
       width: 3 * 16,
       height: 2 * 16,
-      sprite: "assets/img/tiles/junimo-hut.png",
+      sprite: "tiles/junimo-hut.png",
       highlight: {
         path: ["M0,0", "L272,0", "L272,272", "L0,272", "z"],
         width: 272,
@@ -549,37 +549,37 @@ var data = {
     shed: {
       width: 7 * 16,
       height: 3 * 16,
-      sprite: "assets/img/tiles/shed.png"
+      sprite: "tiles/shed.png"
     },
     "object-restriction": {
       width: 16,
       height: 16,
-      sprite: "assets/img/tiles/object-restriction.png"
+      sprite: "tiles/object-restriction.png"
     },
     "building-restriction": {
       width: 16,
       height: 16,
-      sprite: "assets/img/tiles/building-restriction.png"
+      sprite: "tiles/building-restriction.png"
     },
     "stone-cabin": {
       width: 5 * 16,
       height: 3 * 16,
-      sprite: "assets/img/tiles/stone-cabin.png"
+      sprite: "tiles/stone-cabin.png"
     },
     "plank-cabin": {
       width: 5 * 16,
       height: 3 * 16,
-      sprite: "assets/img/tiles/plank-cabin.png"
+      sprite: "tiles/plank-cabin.png"
     },
     "log-cabin": {
       width: 5 * 16,
       height: 3 * 16,
-      sprite: "assets/img/tiles/log-cabin.png"
+      sprite: "tiles/log-cabin.png"
     },
     "shipping-bin": {
       width: 2 * 16,
       height: 16,
-      sprite: "assets/img/tiles/shipping-bin.png"
+      sprite: "tiles/shipping-bin.png"
     }
   }
 };

@@ -5,7 +5,7 @@ export const loadImage = image => {
     img.onerror = err => {
       reject(err);
     };
-    img.src = image;
+    img.src = `assets/${image}`;
   });
 };
 
@@ -16,7 +16,12 @@ export const pathArrayToPoints = path => {
 
   let p = path
     .filter(p => ["L", "M"].includes(p.slice(0, 1)))
-    .map(p => p.slice(1).split(",").map(i => parseInt(i) || 0));
+    .map(p =>
+      p
+        .slice(1)
+        .split(",")
+        .map(i => parseInt(i) || 0)
+    );
   return p;
 };
 

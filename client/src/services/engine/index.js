@@ -57,11 +57,9 @@ export default class Engine {
       })
       .then(buildings => {
         this.buildings = buildings;
-        return loadImage(require(`../../assets/img/highlight.png`)).then(
-          img => {
-            this.highlightPattern = this.ctx.createPattern(img, `repeat`);
-          }
-        );
+        return loadImage(`tiles/highlight.png`).then(img => {
+          this.highlightPattern = this.ctx.createPattern(img, `repeat`);
+        });
       })
       .then(() => {
         callback("Binding Events");
@@ -87,9 +85,7 @@ export default class Engine {
 
   loadLayout = layoutName => {
     let layout = layouts[layoutName];
-    return loadImage(
-      require(`../../assets/img/layouts/${layout.backgroundImage}`)
-    ).then(img => {
+    return loadImage(`layouts/${layout.backgroundImage}`).then(img => {
       return new Layout(layout, img);
     });
   };
@@ -97,7 +93,7 @@ export default class Engine {
   loadBuildings = () => {
     const _this = this;
     let promises = Object.entries(sprites.buildings).map(([key, building]) =>
-      loadImage(require(`../../${building.sprite}`)).then(
+      loadImage(building.sprite).then(
         img =>
           new Building(
             _this,
@@ -114,7 +110,7 @@ export default class Engine {
 
   loadTiles = () => {
     let promises = sprites.tiles.map(tile =>
-      loadImage(require(`../../assets/img/tiles/${tile}.png`))
+      loadImage(`tiles/${tile}.png`)
     );
     return Promise.all(promises);
   };
@@ -230,7 +226,7 @@ export default class Engine {
       this.ctx.closePath();
     }
     // Draw Restriction
-      this.layout.drawPathRestrictions(this.ctx, this.position, 1.2)
+    this.layout.drawPathRestrictions(this.ctx, this.position, 1.2);
 
     //Draw Mouse Tile
     this.ctxUI.beginPath();
