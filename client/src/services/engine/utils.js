@@ -5,7 +5,7 @@ export const loadImage = image => {
     img.onerror = err => {
       reject(err);
     };
-    img.src = `assets/${image}`;
+    img.src = image;
   });
 };
 

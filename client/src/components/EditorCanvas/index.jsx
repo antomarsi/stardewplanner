@@ -4,13 +4,15 @@ import Engine from "../../services/engine";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { SetLoading, RemoveLoading } from "../../store/ducks/loading/actions";
+import SideBar from "./Sidebar";
 
 class EditorCanvas extends Component {
   constructor() {
     super();
     this.state = {
       stageWidth: 1000,
-      loading: null
+      loading: null,
+      sidebarList: []
     };
     this.offsetHeight = 65;
     this.engine = new Engine();
@@ -21,7 +23,29 @@ class EditorCanvas extends Component {
       .load(this.refs.canvas, this.refs.canvasUI, "regular", msg =>
         this.props.SetLoading("CANVAS_LOADING", msg)
       )
-      .then(() => this.props.RemoveLoading("CANVAS_LOADING"))
+      .then(() => {
+        this.props.RemoveLoading("CANVAS_LOADING");
+        this.setState({
+          sidebarList: [
+            {
+              title: "Tiles",
+              items: this.engine.tiles.map(tile => ({
+                id: tile.id,
+                name: tile.name,
+                img: tile.src
+              }))
+            },
+            {
+              title: "Buildings",
+              items: this.engine.buildings.map(building => ({
+                id: building.id,
+                name: building.name,
+                img: building.src
+              }))
+            }
+          ]
+        });
+      })
       .catch(err => {
         console.error(err);
       });
@@ -40,7 +64,8 @@ class EditorCanvas extends Component {
   }
   render() {
     return (
-      <div className="editor" ref="container">
+      <div className="editor" ref="container" id="wrapper">
+        <SideBar list={this.state.sidebarList} />
         <canvas
           id="canvas"
           ref="canvas"

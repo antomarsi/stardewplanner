@@ -2,6 +2,9 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
+/* Customs */
+@import "custom";
+
 @import "fonts";
 @import "variables";
 @import "home";
@@ -9,6 +12,7 @@
 
 /* Components */
 @import "./components/loader";
+@import "./components/sidebar";
 
 /* Vendor */
 @import "~react-image-lightbox/style.css";

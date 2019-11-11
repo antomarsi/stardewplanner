@@ -1,6 +1,7 @@
 import sprites from "../../assets/data/sprites";
 import { loadImage, GreenHouseEnum } from "./utils";
 import Building from "./building";
+import Tile from "./tile";
 import layouts from "../../assets/data/layouts";
 import Layout from "./layout";
 
@@ -57,7 +58,7 @@ export default class Engine {
       })
       .then(buildings => {
         this.buildings = buildings;
-        return loadImage(`tiles/highlight.png`).then(img => {
+        return loadImage(`assets/tiles/highlight.png`).then(img => {
           this.highlightPattern = this.ctx.createPattern(img, `repeat`);
         });
       })
@@ -85,7 +86,7 @@ export default class Engine {
 
   loadLayout = layoutName => {
     let layout = layouts[layoutName];
-    return loadImage(`layouts/${layout.backgroundImage}`).then(img => {
+    return loadImage(`assets/layouts/${layout.backgroundImage}`).then(img => {
       return new Layout(layout, img);
     });
   };
@@ -93,7 +94,7 @@ export default class Engine {
   loadBuildings = () => {
     const _this = this;
     let promises = Object.entries(sprites.buildings).map(([key, building]) =>
-      loadImage(building.sprite).then(
+      loadImage(`assets/${building.sprite}`).then(
         img =>
           new Building(
             _this,
@@ -109,9 +110,12 @@ export default class Engine {
   };
 
   loadTiles = () => {
-    let promises = sprites.tiles.map(tile =>
-      loadImage(`tiles/${tile}.png`)
-    );
+    const _this = this;
+    let promises = sprites.tiles.map(tile => {
+      return loadImage(`assets/tiles/${tile}.png`).then(
+        img => new Tile(_this, tile, img, _this.tileSize, _this.tileSize)
+      );
+    });
     return Promise.all(promises);
   };
 
