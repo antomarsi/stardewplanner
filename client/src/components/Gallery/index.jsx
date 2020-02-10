@@ -22,7 +22,7 @@ const Gallery = ({ title, description, planList, loading }) => {
       )}
       {!loading &&
         planList.map((planData, index) => (
-          <Col xs={12} sm={6} md={4} lg={3} xl={2} className="text-center">
+          <Col xs={12} sm={6} md={4} lg={3} xl={2} className="text-center" key={planData.id}>
             <div
               className="image-wrapper"
               onClick={() => {

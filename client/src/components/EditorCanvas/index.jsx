@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { SetLoading, RemoveLoading } from "../../store/ducks/loading/actions";
 import SideBar from "./Sidebar";
+import classNames from "classnames";
 
 class EditorCanvas extends Component {
   constructor() {
@@ -17,6 +18,7 @@ class EditorCanvas extends Component {
     this.offsetHeight = 65;
     this.engine = new Engine();
   }
+
   componentDidMount() {
     this.checkSize();
     this.engine
@@ -63,8 +65,13 @@ class EditorCanvas extends Component {
     this.props.RemoveLoading("CANVAS_LOADING");
   }
   render() {
+    const { sidebarOpen } = this.props;
     return (
-      <div className="editor" ref="container" id="wrapper">
+      <div
+        className={classNames(["editor", { toggled: !sidebarOpen }])}
+        ref="container"
+        id="wrapper"
+      >
         <SideBar list={this.state.sidebarList} />
         <canvas
           id="canvas"
@@ -84,6 +91,11 @@ class EditorCanvas extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  sidebarOpen: state.editor.sidebarOpen
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -93,7 +105,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(EditorCanvas);
+export default connect(mapStateToProps, mapDispatchToProps)(EditorCanvas);

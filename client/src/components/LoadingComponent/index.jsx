@@ -51,7 +51,6 @@ const LoadingComponent = () => {
   const { loading } = useSelector(state => state.loading);
 
   const hasLoading = loading && loading.length > 0;
-console.log(loading);
   return (
     <div id="loader-wrapper" className={!hasLoading ? "loaded" : ""}>
       <div id="loader"/>

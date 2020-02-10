@@ -12,6 +12,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchRequest());
   }, [dispatch]);
+
   return (
     <div className="d-flex home-bg">
       <Container>

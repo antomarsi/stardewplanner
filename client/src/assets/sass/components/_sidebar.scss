@@ -96,3 +96,10 @@
     margin-right: 0;
   }
 }
+
+/* EDITOR */
+img.pixalated-img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}

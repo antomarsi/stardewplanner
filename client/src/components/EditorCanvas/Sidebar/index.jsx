@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import {
-  Row,
-  Col,
   Nav,
   NavItem,
-  Container,
   NavLink,
   Collapse,
   UncontrolledTooltip,
@@ -14,11 +11,16 @@ import {
 } from "reactstrap";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { SelectItem } from "../../../store/ducks/editor/actions";
 // import { Container } from './styles';
 
 const BarCategory = ({ title, items }) => {
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
+  const selectedItem = useSelector(state => state.editor.selected);
+  const dispatch = useDispatch();
+
   return (
     <div>
       <NavItem
@@ -37,11 +39,18 @@ const BarCategory = ({ title, items }) => {
       >
         <CardColumns className="tiles-list">
           {items.map(item => (
-            <Card key={item.id}>
+            <Card key={item.id} outline={selectedItem.id === item.id} color={"primary"}>
               <CardImg
                 id={item.id}
                 src={item.img}
-                className="img-fluid"
+                onClick={() => {
+                  dispatch(SelectItem(item));
+                }}
+                className={classNames([
+                  "img-fluid",
+                  "pixalated-img",
+                  { selected: selectedItem.id === item.id }
+                ])}
                 alt={item.name}
               />
               <UncontrolledTooltip placement="bottom" target={item.id}>
