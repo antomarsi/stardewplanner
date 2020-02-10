@@ -18,7 +18,7 @@ import { SelectItem } from "../../../store/ducks/editor/actions";
 const BarCategory = ({ title, items }) => {
   const [collapsed, setCollapsed] = useState(true);
   const toggleNavbar = () => setCollapsed(!collapsed);
-  const selectedItem = useSelector(state => state.editor.selected);
+  const selectedId = useSelector(state => state.editor.selected ? state.editor.selected.id : null);
   const dispatch = useDispatch();
 
   return (
@@ -39,7 +39,7 @@ const BarCategory = ({ title, items }) => {
       >
         <CardColumns className="tiles-list">
           {items.map(item => (
-            <Card key={item.id} outline={selectedItem.id === item.id} color={"primary"}>
+            <Card key={item.id} outline={selectedId === item.id} color={"primary"}>
               <CardImg
                 id={item.id}
                 src={item.img}
@@ -49,7 +49,7 @@ const BarCategory = ({ title, items }) => {
                 className={classNames([
                   "img-fluid",
                   "pixalated-img",
-                  { selected: selectedItem.id === item.id }
+                  { selected: selectedId === item.id }
                 ])}
                 alt={item.name}
               />
